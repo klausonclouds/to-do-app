@@ -1,14 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
-import { Header, Navbar, Todolist, Footer } from './components'
+import { Header, Todolist, Footer } from './components';
 
 function App() {
+  const [isPopup, setIsPopup] = useState(false);
+
+  const handlePopup = () => {
+    setIsPopup((prevIsPopup) => !prevIsPopup);
+  };
+
   return (
     <div className="App">
-        <Header />
-        <Navbar />
-        <Todolist />
-        <Footer />
+      <Header isPopup={isPopup} onClick={handlePopup} />
+      <Todolist />
+      <Footer />
     </div>
   );
 }

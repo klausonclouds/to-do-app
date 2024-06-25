@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import './popup.css';
 
 const endPoint = 'https://onlineprojectsgit.github.io/API/WDEndpoint.json';
 
-function Popup(props) {
+function Popup({ onClick, isPopup, type, selectedTodoObj }) {
   const [students, setStudents] = useState([]);
   const [formData, setFormData] = useState({
     title: '',
@@ -14,6 +15,7 @@ function Popup(props) {
     id: null,
   });
 
+  // Fetch data during inital render
   useEffect(() => {
     fetch(endPoint)
       .then((res) => res.json())
@@ -23,41 +25,62 @@ function Popup(props) {
       .catch((err) => console.error(err.message));
   }, []);
 
+  // update formData each time the selected todo updates
+  useEffect(() => {
+    if (selectedTodoObj) {
+      setFormData(selectedTodoObj);
+    }
+  }, [selectedTodoObj]);
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevFormData) => {
       return {
         ...prevFormData,
         [name]: value,
-        id: Date.now(),
+        id: uuidv4(),
       };
     });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
-    // ?? Store new task to local storage. Maybe get task list first then add to task list then store in local storage
-    localStorage.setItem('newTask', JSON.stringify(formData));
-    setFormData({
-      title: '',
-      description: '',
-      dueDate: '',
-      assignTo: '',
-      status: '',
-      id: null,
-    });
-    props.onClick();
+    if (type === 'add') {
+      // Add new todo and store into localstorage
+      let todoList = JSON.parse(localStorage.getItem('todos'));
+      console.log(todoList);
+      todoList.push(formData);
+      localStorage.setItem('todos', JSON.stringify(todoList));
+      setFormData({
+        title: '',
+        description: '',
+        dueDate: '',
+        assignTo: '',
+        status: '',
+        id: null,
+      });
+      onClick();
+    } else {
+      const todoList = JSON.parse(localStorage.getItem('todos'));
+      const objIndex = todoList.findIndex((todo) => {
+        return todo.id === selectedTodoObj.id;
+      });
+      console.log(objIndex);
+      todoList[objIndex] = formData;
+      console.log(todoList);
+      localStorage.setItem('todos', JSON.stringify(todoList));
+      onClick();
+    }
   };
 
-  return props.isPopup ? (
+  return isPopup ? (
     <div className="popup">
       <div className="popup-inner">
-        <button className="close-btn" onClick={props.onClick}>
+        <button className="close-btn" onClick={onClick}>
           &#10006;
         </button>
         <form className="todo-form" onSubmit={handleSubmit}>
-          <h3 className="form-heading">{props.type === 'add' ? 'Add Todo' : 'Update Todo'}</h3>
+          <h3 className="form-heading">{type === 'add' ? 'Add Todo' : 'Update Todo'}</h3>
           <label htmlFor="title">Title</label>
           <input
             type="text"
@@ -114,14 +137,14 @@ function Popup(props) {
             required
           >
             <option value=""></option>
-            <option value="in-progress">In-progress</option>
+            <option value="In-progress">In-progress</option>
             <option value="Completed">Completed</option>
             <option value="Review">Review</option>
           </select>
 
           <div className="popup-btns">
-            <button className="add-btn">{props.type === 'add' ? 'Add Task' : 'Update Task'}</button>
-            <button className="cancel-btn" type="button" onClick={props.onClick}>
+            <button className="add-btn">{type === 'add' ? 'Add Task' : 'Update Task'}</button>
+            <button className="cancel-btn" type="button" onClick={onClick}>
               Cancel
             </button>
           </div>

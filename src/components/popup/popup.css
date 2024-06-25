@@ -21,10 +21,10 @@
   position: relative;
   padding: 16px 32px;
   max-width: 640px;
-  background-color: #afcbad;
+  background-color: var(--color-popup-bg);
   border-radius: 5px;
   animation: dropTop 0.3s linear;
-  color: #f0eadd;
+  color: var(--color-popup-text);
 }
 
 .popup-inner .close-btn {
@@ -85,13 +85,13 @@
   cursor: pointer;
   border: none;
   border-radius: 2px;
-  color: #f2f1eb;
-  background-color: #567656;
+  color: var(--color-popup-addBtn-text);
+  background-color: var(--color-popup-addBtn-bg);
 }
 
 .cancel-btn {
-  background-color: #d2d3dc;
-  color: #696b84;
+  background-color: var(--color-popup-cancelBtn-bg);
+  color: var(--color-popup-cancelBtn-text);
 }
 
 @keyframes dropTop {

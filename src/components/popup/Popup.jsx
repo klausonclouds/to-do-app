@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+// import { v4 as uuidv4 } from 'uuid';
 import './popup.css';
 
 const endPoint = 'https://onlineprojectsgit.github.io/API/WDEndpoint.json';
 
-function Popup({ onClick, isPopup, type, index, selectedTodoObj, id }) {
+function Popup({ onClick, isPopup, type, selectedTodoObj }) {
   const [students, setStudents] = useState([]);
   const [formData, setFormData] = useState({
     title: '',
@@ -13,6 +13,17 @@ function Popup({ onClick, isPopup, type, index, selectedTodoObj, id }) {
     assignTo: '',
     status: '',
     id: null,
+  });
+
+  const [todos, setTodos] = useState([]);
+
+  useEffect(() => {
+    const storedTodos = JSON.parse(localStorage.getItem('todos')) || [];
+    setTodos(storedTodos);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('todos', JSON.stringify(todos));
   });
 
   // Fetch data during inital render
@@ -38,7 +49,7 @@ function Popup({ onClick, isPopup, type, index, selectedTodoObj, id }) {
       return {
         ...prevFormData,
         [name]: value,
-        id: uuidv4(),
+        id: Date.now(),
       };
     });
   };
@@ -47,10 +58,7 @@ function Popup({ onClick, isPopup, type, index, selectedTodoObj, id }) {
     e.preventDefault();
     if (type === 'add') {
       // Add new todo and store into localstorage
-      let todoList = JSON.parse(localStorage.getItem('todos')) || [];
-      console.log(todoList);
-      todoList.push(formData);
-      localStorage.setItem('todos', JSON.stringify(todoList));
+      setTodos((prevTodos) => [...prevTodos, formData]);
       setFormData({
         title: '',
         description: '',
@@ -60,14 +68,18 @@ function Popup({ onClick, isPopup, type, index, selectedTodoObj, id }) {
         id: null,
       });
       onClick();
-    } else {
-      //update todo and store in localstorage
-      console.log(formData);
-      let todoList = JSON.parse(localStorage.getItem('todos'));
-      console.log(index);
-      console.log(id);
-      todoList[index] = formData;
-      localStorage.setItem('todos', JSON.stringify(todoList));
+    } else if (type === 'update') {
+      console.log(selectedTodoObj.id);
+      console.log(todos);
+      const updatedTodos = todos.map((todo) => {
+        if (todo.id === selectedTodoObj.id) {
+          return { ...todo, ...formData };
+        }
+        return todo;
+      });
+
+      setTodos(updatedTodos);
+
       onClick();
     }
   };
@@ -142,7 +154,7 @@ function Popup({ onClick, isPopup, type, index, selectedTodoObj, id }) {
           </select>
 
           <div className="popup-btns">
-            <button className="add-btn">{type === 'add' ? 'Add Task' : 'Update Task'}</button>
+            <button className="add-btn">{type === 'add' ? 'Add New Task' : 'Update Task'}</button>
             <button className="cancel-btn" type="button" onClick={onClick}>
               Cancel
             </button>

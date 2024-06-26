@@ -8,7 +8,7 @@ const Todolist = () => {
   // let todos = JSON.parse(localStorage.getItem('todos')) || [];
 
   const [todos, setTodos] = useState(JSON.parse(localStorage.getItem('todos')) || []);
-  const [checkedStates, setCheckedStates] = useState({});
+  const [checkedStates, setCheckedStates] = useState([]);
   const [sortOption, setSortOption] = useState('sort');
 
   const [isPopup, setIsPopup] = useState(false);
@@ -62,21 +62,28 @@ const Todolist = () => {
   //   ]);
   // };
 
-  const handleCheckboxChange = (id) => {
+  const handleCheckboxChange = (id, isChecked) => {
+
     const updatedTodos = todos.map((todo) => {
       if (todo.id === id) {
-        const newStatus = !checkedStates[id] ? 'completed' : 'in-progress';
+        const newStatus = isChecked ? 'completed' : 'in-progress';
+        // console.log(newStatus);
         return { ...todo, status: newStatus };
-      }
+        // todo.status = newStatus;
+      } 
       return todo;
     });
-
+    
+    localStorage.setItem('todos', JSON.stringify(updatedTodos));
     setTodos(updatedTodos);
+
 
     setCheckedStates({
       ...checkedStates,
-      [id]: !checkedStates[id],
+      [id]: isChecked
     });
+
+    //  console.log(checkedStates);
   };
 
   const handleDelete = (id) => {
@@ -131,22 +138,15 @@ const Todolist = () => {
         <ul>
           {todos.map((todo, index) => (
             <li
-              className="todo-container"
+              className={`todo-container ${todo.status.toLowerCase().replace(' ', '-')}`}
               key={todo.id}
-              style={{
-                backgroundColor: `var(${
-                  checkedStates[todo.id]
-                    ? '--unchecked-background-color'
-                    : '--checked-background-color'
-                })`,
-              }}
             >
               <input
                 type="checkbox"
                 name={todo.title}
                 id={todo.id}
                 checked={checkedStates[todo.id] || false}
-                onChange={() => handleCheckboxChange(todo.id)}
+                onChange={(e) => handleCheckboxChange(todo.id, e.target.checked)}
               />
               <div className="todo-content">
                 <div className="todo-title">{todo.title}</div>

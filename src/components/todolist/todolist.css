@@ -70,12 +70,25 @@
   width: 100%;
   padding: 10px;
 
-  border: 1px solid var(--border-color);
+  /* border: 1px solid var(--border-color); */
   border-radius: 8px;
   background-color: var(--background-color2);
 
   margin: 10px 0;
 }
+
+.in-progress {
+  background-color: var(--in-progress-bg-color);
+}
+
+.review {
+  background-color: var(--review-bg-color);
+}
+
+.completed {
+  background-color: var(--completed-bg-color);
+}
+
 
 .todo-container input {
   flex: 1;

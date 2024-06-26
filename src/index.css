@@ -25,5 +25,8 @@
   --checked-background-color: #43a047;
   --unchecked-background-color: #858a88;
 
+  --in-progress-bg-color: #abebc6; 
+  --review-bg-color: #f4e6afbb;
+  --completed-bg-color: #858a88bf;
 
 }

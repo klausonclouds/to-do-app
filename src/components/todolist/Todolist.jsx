@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './todolist.css';
 import Popup from '../popup/Popup';
+import { render } from '@testing-library/react';
 
 const Todolist = () => {
 
@@ -36,6 +37,10 @@ const Todolist = () => {
     setSelectedTodoObj(selectedTodo);
   };
 
+  const renderTodos = () => {
+    setTodos(JSON.parse(localStorage.getItem('todos')));
+  }
+  
   // const initTodos = () => {
   //   setTodos([
   //     {
@@ -77,6 +82,8 @@ const Todolist = () => {
   const handleDelete = (id) => {
     if (window.confirm('Are you sure to delete the to-do item?')) {
       const updateTodos = todos.filter((todo) => todo.id !== id);
+
+      localStorage.setItem('todos', JSON.stringify(updateTodos));
       setTodos(updateTodos);
     }
   };
@@ -120,7 +127,7 @@ const Todolist = () => {
             <option value="status">Sort by Status</option>
           </select>
         </div>
-        <Popup type="add" onClick={handlePopup} isPopup={isPopup} />
+        <Popup type="add" onClick={handlePopup} isPopup={isPopup} renderTodos={renderTodos}/>
         <ul>
           {todos.map((todo, index) => (
             <li
@@ -172,6 +179,7 @@ const Todolist = () => {
         onClick={handleUpdatePopup}
         selectedTodoObj={selectedTodoObj}
         handleUpdateTodo={handleUpdateTodo}
+        renderTodos={renderTodos}
       />
     </>
   );

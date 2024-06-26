@@ -4,7 +4,7 @@ import './popup.css';
 
 const endPoint = 'https://onlineprojectsgit.github.io/API/WDEndpoint.json';
 
-function Popup({ onClick, isPopup, type, selectedTodoObj }) {
+function Popup({ onClick, isPopup, type, selectedTodoObj, renderTodos }) {
   const [students, setStudents] = useState([]);
   const [formData, setFormData] = useState({
     title: '',
@@ -59,6 +59,7 @@ function Popup({ onClick, isPopup, type, selectedTodoObj }) {
         id: null,
       });
       onClick();
+      renderTodos();
     } else if (type === 'update') {
       //Update
       console.log(selectedTodoObj.id);
@@ -69,6 +70,7 @@ function Popup({ onClick, isPopup, type, selectedTodoObj }) {
       localStorage.setItem('todos', JSON.stringify(storedTodos));
 
       onClick();
+      renderTodos();
     }
   };
 

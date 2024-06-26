@@ -14,6 +14,7 @@ const Todolist = () => {
 
     const handlePopup = () => {
         setIsPopup((prevIsPopup) => !prevIsPopup);
+        // <Popup type="add" onClick={handlePopup} isPopup={isPopup} />
       };
 
     const initTodos = () => {
@@ -38,6 +39,7 @@ const Todolist = () => {
             ])
 
         }
+
     const handleCheckboxChange = (id) => {
         const updatedTodos = todos.map(todo => {
             if (todo.id === id) {
@@ -93,7 +95,7 @@ const Todolist = () => {
     return (
         <div className="todos-container">
             <div className="todo-menu">
-                <button className="add todo-btn">Add To-Do</button>
+                <button className="add todo-btn" onClick={handlePopup}>Add To-Do</button>
                 <button onClick={initTodos}>Init Todos</button>
                 {/* <button className="Sort todo-btn">Sort By</button> */}
                 <select name="sort todo-btn" value={sortOption} onChange={handleSortChange}>
@@ -104,7 +106,7 @@ const Todolist = () => {
             </div>
             <Popup type="add" onClick={handlePopup} isPopup={isPopup} />
             <ul>
-                {todos.map((todo) => (
+                {todos.map((todo,index) => (
                     <li
                     className="todo-container"
                     key={todo.id}

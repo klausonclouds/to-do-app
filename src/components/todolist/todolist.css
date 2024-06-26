@@ -1,0 +1,121 @@
+.todos-container {
+    margin: 20px auto;
+    padding: 20px;
+    width: 80%;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    border: 1px solid var(--primary-color);
+    border-radius: 8px;
+    background-color: var(--background-color);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.todo-btn {
+    border-radius: 3px;
+    padding: 10px 20px;
+    border: none;
+    background-color: var(--primary-color);
+    color: white;
+    cursor: pointer;
+}
+
+.todo-btn:hover {
+    background-color: var(--secondary-color);
+}
+
+.todo-menu {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    margin: 10px;
+    /* padding: 5px; */
+}
+
+.todo-menu .todo-btn{
+    /* width: 20%; */
+    /* list-style-type: none; */
+    padding: auto 20px;
+}
+
+.todo-menu select {
+    border-radius: 5px;
+    padding: 20px;
+    border: 1px solid var(--border-color);
+    background-color: white;
+    color: var(--text-color);
+    cursor: pointer;
+    transition: border-color 0.3s, box-shadow 0.3s;
+
+}
+
+.todos-container ul {
+    width: 100%;
+}
+
+.todo-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 100%;
+    padding: 10px;
+
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: var(--background-color2);
+
+    margin: 10px 0;
+
+}
+
+.todo-container input {
+    flex: 1;
+    position: relative;
+    height: 20px;
+    width: 20px;
+    border-radius: 4px;
+}
+
+
+.todo-content {
+    flex: 5;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+
+.todo-content .todo-title {
+
+    font-weight: 800;
+    margin-right: 20px;
+}
+
+.todo-content .todo-due {
+    color: var(--accent-color);
+    margin-right: 20px;
+}
+
+.todo-description {
+    flex: 1;
+    color: var(--text-color);
+}
+
+.todo-container button {
+    flex: 0.5;
+    margin: auto 20px;
+    padding: auto 0px;
+}
+
+.todo-container button:hover {
+    background-color: var(--secondary-color);
+}

@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from 'react';
 import './todolist.css';
-// import '../../index.css'
+import Popup from '../popup/Popup';
 
 const Todolist = () => {
 
@@ -9,6 +9,12 @@ const Todolist = () => {
     const [todos, setTodos] = useState(JSON.parse(localStorage.getItem('todos')) || []);
     const [checkedStates, setCheckedStates] = useState({});
     const [sortOption, setSortOption] = useState("sort");
+
+    const [isPopup, setIsPopup] = useState(false);
+
+    const handlePopup = () => {
+        setIsPopup((prevIsPopup) => !prevIsPopup);
+      };
 
     const initTodos = () => {
 
@@ -62,6 +68,12 @@ const Todolist = () => {
 
     }
 
+    // const handleUpdatePopup = (id) => {
+    //     setUpdatePopup((prevUpdatePopup) => !prevUpdatePopup);
+    //     const selectedTodo = storedTodos.find((todo) => todo.id === id);
+    //     setSelectedTodoObj(selectedTodo);
+    //   };
+
     const handleSortChange = (e) => {
         setSortOption(e.target.value);
         sortTodos(e.target.value)
@@ -90,6 +102,7 @@ const Todolist = () => {
                     <option value="status">Sort by Status</option>
                 </select>
             </div>
+            <Popup type="add" onClick={handlePopup} isPopup={isPopup} />
             <ul>
                 {todos.map((todo) => (
                     <li

@@ -1,0 +1,107 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-inner {
+  position: relative;
+  padding: 16px 32px;
+  max-width: 640px;
+  background-color: var(--color-popup-bg);
+  border-radius: 5px;
+  animation: dropTop 0.3s linear;
+  color: var(--color-popup-text);
+}
+
+.popup-inner .close-btn {
+  border: none;
+  background-color: #fff;
+  position: absolute;
+  top: -25px;
+  right: 5px;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  border-radius: 2px;
+}
+
+.popup-inner .close-btn:hover {
+  background-color: red;
+  color: #fff;
+}
+
+.todo-form input,
+#status,
+#assign-to {
+  width: 15rem;
+}
+
+.todo-form label {
+  width: 15rem;
+  text-align: left;
+}
+
+.todo-form .form-heading {
+  align-self: flex-start;
+  margin-bottom: 10px;
+}
+
+.todo-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  margin: 0 auto;
+}
+
+.popup-btns {
+  margin-top: 15px;
+  width: 100%;
+  display: flex;
+  gap: 5px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.add-btn,
+.cancel-btn {
+  padding: 3px;
+  width: 50%;
+  cursor: pointer;
+  border: none;
+  border-radius: 2px;
+  color: var(--color-popup-addBtn-text);
+  background-color: var(--color-popup-addBtn-bg);
+}
+
+.cancel-btn {
+  background-color: var(--color-popup-cancelBtn-bg);
+  color: var(--color-popup-cancelBtn-text);
+}
+
+@keyframes dropTop {
+  0% {
+    transform: translateY(-100%) scale(0);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0%) scale(1);
+    opacity: 1;
+  }
+}

@@ -1,14 +1,15 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
-import { Header, Navbar, Todolist, Footer } from './components'
+import { Header, Todolist, Footer } from './components';
 
 function App() {
+
+
   return (
     <div className="App">
-        <Header />
-        <Navbar />
-        <Todolist />
-        <Footer />
+      <Header />
+      <Todolist />
+      <Footer />
     </div>
   );
 }

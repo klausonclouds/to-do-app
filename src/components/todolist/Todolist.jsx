@@ -19,7 +19,7 @@ const Todolist = () => {
 
     const initTodos = () => {
 
-            setTodos([
+            setTodos(t => [...t,
                 {
                     title: 'haircut',
                     description: 'haircut in World Square',

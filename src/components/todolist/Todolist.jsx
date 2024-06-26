@@ -15,7 +15,7 @@ const Todolist = () => {
   const [selectedTodoObj, setSelectedTodoObj] = useState(null);
 
   useEffect(() => {
-    const todoList = JSON.parse(localStorage.getItem('todos'));
+    const todoList = JSON.parse(localStorage.getItem('todos')) || [];
     setTodos(todoList);
   }, []);
 
@@ -36,26 +36,26 @@ const Todolist = () => {
     setSelectedTodoObj(selectedTodo);
   };
 
-  const initTodos = () => {
-    setTodos([
-      {
-        title: 'haircut',
-        description: 'haircut in World Square',
-        dueDate: '2024/06/02',
-        assignTo: 'Jiangcheng He',
-        status: 'in-progress',
-        id: '8223',
-      },
-      {
-        title: 'grocery',
-        description: 'harris farm',
-        dueDate: '2024/06/30',
-        assignTo: 'Kun Chang',
-        status: 'in-progress',
-        id: '29482',
-      },
-    ]);
-  };
+  // const initTodos = () => {
+  //   setTodos([
+  //     {
+  //       title: 'haircut',
+  //       description: 'haircut in World Square',
+  //       dueDate: '2024/06/02',
+  //       assignTo: 'Jiangcheng He',
+  //       status: 'in-progress',
+  //       id: '8223',
+  //     },
+  //     {
+  //       title: 'grocery',
+  //       description: 'harris farm',
+  //       dueDate: '2024/06/30',
+  //       assignTo: 'Kun Chang',
+  //       status: 'in-progress',
+  //       id: '29482',
+  //     },
+  //   ]);
+  // };
 
   const handleCheckboxChange = (id) => {
     const updatedTodos = todos.map((todo) => {
@@ -112,7 +112,7 @@ const Todolist = () => {
           <button className="add todo-btn" onClick={handlePopup}>
             Add To-Do
           </button>
-          <button onClick={initTodos}>Init Todos</button>
+          {/* <button onClick={initTodos}>Init Todos</button> */}
           {/* <button className="Sort todo-btn">Sort By</button> */}
           <select name="sort todo-btn" value={sortOption} onChange={handleSortChange}>
             <option value="sort">Sort By</option>

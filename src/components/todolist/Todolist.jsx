@@ -22,7 +22,6 @@ const Todolist = () => {
 
   const handlePopup = () => {
     setIsPopup((prevIsPopup) => !prevIsPopup);
-    // <Popup type="add" onClick={handlePopup} isPopup={isPopup} />
   };
 
   const handleUpdatePopup = () => {
@@ -40,36 +39,14 @@ const Todolist = () => {
   const renderTodos = () => {
     setTodos(JSON.parse(localStorage.getItem('todos')));
   }
-  
-  // const initTodos = () => {
-  //   setTodos([
-  //     {
-  //       title: 'haircut',
-  //       description: 'haircut in World Square',
-  //       dueDate: '2024/06/02',
-  //       assignTo: 'Jiangcheng He',
-  //       status: 'in-progress',
-  //       id: '8223',
-  //     },
-  //     {
-  //       title: 'grocery',
-  //       description: 'harris farm',
-  //       dueDate: '2024/06/30',
-  //       assignTo: 'Kun Chang',
-  //       status: 'in-progress',
-  //       id: '29482',
-  //     },
-  //   ]);
-  // };
+
 
   const handleCheckboxChange = (id, isChecked) => {
 
     const updatedTodos = todos.map((todo) => {
       if (todo.id === id) {
         const newStatus = isChecked ? 'completed' : 'in-progress';
-        // console.log(newStatus);
         return { ...todo, status: newStatus };
-        // todo.status = newStatus;
       } 
       return todo;
     });
@@ -83,7 +60,6 @@ const Todolist = () => {
       [id]: isChecked
     });
 
-    //  console.log(checkedStates);
   };
 
   const handleDelete = (id) => {
@@ -95,13 +71,6 @@ const Todolist = () => {
     }
   };
 
-  // const handleEdit = (id) => {};
-
-  // const handleUpdatePopup = (id) => {
-  //     setUpdatePopup((prevUpdatePopup) => !prevUpdatePopup);
-  //     const selectedTodo = storedTodos.find((todo) => todo.id === id);
-  //     setSelectedTodoObj(selectedTodo);
-  //   };
 
   const handleSortChange = (e) => {
     setSortOption(e.target.value);
@@ -126,8 +95,6 @@ const Todolist = () => {
           <button className="add todo-btn" onClick={handlePopup}>
             Add To-Do
           </button>
-          {/* <button onClick={initTodos}>Init Todos</button> */}
-          {/* <button className="Sort todo-btn">Sort By</button> */}
           <select name="sort todo-btn" value={sortOption} onChange={handleSortChange}>
             <option value="sort">Sort By</option>
             <option value="dueDate">Sort by Due Date (Default)</option>
@@ -149,8 +116,8 @@ const Todolist = () => {
                 onChange={(e) => handleCheckboxChange(todo.id, e.target.checked)}
               />
               <div className="todo-content">
-                <div className="todo-title">{todo.title}</div>
                 <span className="todo-due">{todo.dueDate}</span>
+                <div className="todo-title">{todo.title}</div>
                 <div className="todo-description">{todo.description}</div>
                 <div className="todo-status">Status: {todo.status}</div>
               </div>

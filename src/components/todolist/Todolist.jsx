@@ -3,6 +3,7 @@ import './todolist.css';
 import Popup from '../popup/Popup';
 
 const Todolist = () => {
+
   // let todos = JSON.parse(localStorage.getItem('todos')) || [];
 
   const [todos, setTodos] = useState(JSON.parse(localStorage.getItem('todos')) || []);
@@ -177,3 +178,4 @@ const Todolist = () => {
 };
 
 export default Todolist;
+

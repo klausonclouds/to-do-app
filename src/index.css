@@ -13,12 +13,6 @@
   --color-popup-cancelBtn-bg: #d2d3dc;
   --color-popup-cancelBtn-text: #696b84;
 
-  --color-popup-bg: #afcbad;
-  --color-popup-text: #f0eadd;
-  --color-popup-addBtn-bg: #567656;
-  --color-popup-addBtn-text: #f2f1eb;
-  --color-popup-cancelBtn-bg: #d2d3dc;
-  --color-popup-cancelBtn-text: #696b84;
 
   --background-color: #f0f8f5;
   --background-color2: #c4ecda;
@@ -30,4 +24,6 @@
 
   --checked-background-color: #43a047;
   --unchecked-background-color: #858a88;
+
+
 }

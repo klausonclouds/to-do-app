@@ -4,7 +4,7 @@ import './popup.css';
 
 const endPoint = 'https://onlineprojectsgit.github.io/API/WDEndpoint.json';
 
-function Popup({ onClick, isPopup, type, selectedTodoObj }) {
+function Popup({ onClick, isPopup, type, index, selectedTodoObj, id }) {
   const [students, setStudents] = useState([]);
   const [formData, setFormData] = useState({
     title: '',
@@ -47,7 +47,7 @@ function Popup({ onClick, isPopup, type, selectedTodoObj }) {
     e.preventDefault();
     if (type === 'add') {
       // Add new todo and store into localstorage
-      let todoList = JSON.parse(localStorage.getItem('todos'));
+      let todoList = JSON.parse(localStorage.getItem('todos')) || [];
       console.log(todoList);
       todoList.push(formData);
       localStorage.setItem('todos', JSON.stringify(todoList));
@@ -61,13 +61,12 @@ function Popup({ onClick, isPopup, type, selectedTodoObj }) {
       });
       onClick();
     } else {
-      const todoList = JSON.parse(localStorage.getItem('todos'));
-      const objIndex = todoList.findIndex((todo) => {
-        return todo.id === selectedTodoObj.id;
-      });
-      console.log(objIndex);
-      todoList[objIndex] = formData;
-      console.log(todoList);
+      //update todo and store in localstorage
+      console.log(formData);
+      let todoList = JSON.parse(localStorage.getItem('todos'));
+      console.log(index);
+      console.log(id);
+      todoList[index] = formData;
       localStorage.setItem('todos', JSON.stringify(todoList));
       onClick();
     }

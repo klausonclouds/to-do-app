@@ -2,13 +2,13 @@ import React from 'react';
 import './header.css';
 import Popup from '../popup/Popup';
 
-const Header = (props) => {
+const Header = ({ onClick, isPopup }) => {
   return (
     <div>
-      <button className="addNew-btn" onClick={props.onClick}>
+      <button className="addNew-btn" onClick={onClick}>
         Add New Task
       </button>
-      <Popup type="add" onClick={props.onClick} isPopup={props.isPopup} />
+      <Popup type="add" onClick={onClick} isPopup={isPopup} />
     </div>
   );
 };

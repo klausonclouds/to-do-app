@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './todolist.css';
 import Popup from '../popup/Popup';
 
-const Todolist = () => {
-  const [updatePopup, setUpdatePopup] = useState(false);
+const Todolist = ({ isPopup, handlePopup }) => {
   const [storedTodos, setStoreTodos] = useState([]);
   const [selectedTodoObj, setSelectedTodoObj] = useState(null);
 
@@ -13,16 +12,13 @@ const Todolist = () => {
   }, []);
 
   //Handle open edit form and pass the selected todo object to Popup component when updating
-  const handleUpdatePopup = (id) => {
-    setUpdatePopup((prevUpdatePopup) => !prevUpdatePopup);
-    const selectedTodo = storedTodos.find((todo) => todo.id === id);
+  const handleUpdateTodo = (index) => {
+    handlePopup();
+    const selectedTodo = storedTodos[index];
+    console.log(selectedTodo);
+    console.log(index);
     setSelectedTodoObj(selectedTodo);
   };
-
-  // const handleUpdateIndex = (index) => {
-  //   setUpdatePopup((prevUpdatePopup) => !prevUpdatePopup);
-  //   const selectedTodo
-  // };
 
   return (
     <div>
@@ -33,13 +29,13 @@ const Todolist = () => {
             <div key={index}>
               <li>{todo.title}</li>
               <Popup
-                key={todo.id}
+                index={index}
                 type="update"
-                onClick={handleUpdatePopup}
-                isPopup={updatePopup}
+                isPopup={isPopup}
+                onClick={handlePopup}
                 selectedTodoObj={selectedTodoObj}
               />
-              <button className="update-btn" onClick={() => handleUpdatePopup(todo.id)}>
+              <button className="update-btn" onClick={() => handleUpdateTodo(index)}>
                 Update
               </button>
             </div>

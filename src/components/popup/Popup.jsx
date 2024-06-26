@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+// import { v4 as uuidv4 } from 'uuid';
 import './popup.css';
 
 const endPoint = 'https://onlineprojectsgit.github.io/API/WDEndpoint.json';
@@ -38,7 +38,7 @@ function Popup({ onClick, isPopup, type, selectedTodoObj }) {
       return {
         ...prevFormData,
         [name]: value,
-        id: uuidv4(),
+        id: Date.now(),
       };
     });
   };
@@ -47,10 +47,9 @@ function Popup({ onClick, isPopup, type, selectedTodoObj }) {
     e.preventDefault();
     if (type === 'add') {
       // Add new todo and store into localstorage
-      let todoList = JSON.parse(localStorage.getItem('todos'));
-      console.log(todoList);
-      todoList.push(formData);
-      localStorage.setItem('todos', JSON.stringify(todoList));
+      const storedTodos = JSON.parse(localStorage.getItem('todos')) || [];
+      storedTodos.push(formData);
+      localStorage.setItem('todos', JSON.stringify(storedTodos));
       setFormData({
         title: '',
         description: '',
@@ -60,15 +59,15 @@ function Popup({ onClick, isPopup, type, selectedTodoObj }) {
         id: null,
       });
       onClick();
-    } else {
-      const todoList = JSON.parse(localStorage.getItem('todos'));
-      const objIndex = todoList.findIndex((todo) => {
-        return todo.id === selectedTodoObj.id;
-      });
-      console.log(objIndex);
-      todoList[objIndex] = formData;
-      console.log(todoList);
-      localStorage.setItem('todos', JSON.stringify(todoList));
+    } else if (type === 'update') {
+      //Update
+      console.log(selectedTodoObj.id);
+      const storedTodos = JSON.parse(localStorage.getItem('todos'));
+      const todoToUpdateIndex = storedTodos.findIndex((todo) => todo.id === selectedTodoObj.id);
+      storedTodos[todoToUpdateIndex] = { ...formData, id: selectedTodoObj.id };
+      console.log(storedTodos);
+      localStorage.setItem('todos', JSON.stringify(storedTodos));
+
       onClick();
     }
   };
@@ -143,7 +142,7 @@ function Popup({ onClick, isPopup, type, selectedTodoObj }) {
           </select>
 
           <div className="popup-btns">
-            <button className="add-btn">{type === 'add' ? 'Add Task' : 'Update Task'}</button>
+            <button className="add-btn">{type === 'add' ? 'Add New Task' : 'Update Task'}</button>
             <button className="cancel-btn" type="button" onClick={onClick}>
               Cancel
             </button>

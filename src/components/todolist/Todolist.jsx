@@ -105,71 +105,74 @@ const Todolist = () => {
   };
 
   return (
-    <div className="todos-container">
-      <div className="todo-menu">
-        <button className="add todo-btn" onClick={handlePopup}>
-          Add To-Do
-        </button>
-        <button onClick={initTodos}>Init Todos</button>
-        {/* <button className="Sort todo-btn">Sort By</button> */}
-        <select name="sort todo-btn" value={sortOption} onChange={handleSortChange}>
-          <option value="sort">Sort By</option>
-          <option value="dueDate">Sort by Due Date (Default)</option>
-          <option value="status">Sort by Status</option>
-        </select>
-      </div>
-      <Popup type="add" onClick={handlePopup} isPopup={isPopup} />
-      <ul>
-        {todos.map((todo, index) => (
-          <li
-            className="todo-container"
-            key={todo.id}
-            style={{
-              backgroundColor: `var(${
-                checkedStates[todo.id]
-                  ? '--unchecked-background-color'
-                  : '--checked-background-color'
-              })`,
-            }}
-          >
-            <input
-              type="checkbox"
-              name={todo.title}
-              id={todo.id}
-              checked={checkedStates[todo.id] || false}
-              onChange={() => handleCheckboxChange(todo.id)}
-            />
-            <div className="todo-content">
-              <div className="todo-title">{todo.title}</div>
-              <span className="todo-due">{todo.dueDate}</span>
-              <div className="todo-description">{todo.description}</div>
-              <div className="todo-status">Status: {todo.status}</div>
-            </div>
-            <Popup
-              type="update"
-              isPopup={updatePopup}
-              onClick={handleUpdatePopup}
-              selectedTodoObj={selectedTodoObj}
-              handleUpdateTodo={handleUpdateTodo}
-            />
-            <button className="delete todo-btn" onClick={() => handleDelete(todo.id)}>
-              Delete
-            </button>
-            <button
-              className="edit todo-btn"
-              onClick={
-                (handleUpdatePopup,
-                () => {
-                  handleUpdateTodo(todo.id);
-                })
-              }
+    <>
+      <div className="todos-container">
+        <div className="todo-menu">
+          <button className="add todo-btn" onClick={handlePopup}>
+            Add To-Do
+          </button>
+          <button onClick={initTodos}>Init Todos</button>
+          {/* <button className="Sort todo-btn">Sort By</button> */}
+          <select name="sort todo-btn" value={sortOption} onChange={handleSortChange}>
+            <option value="sort">Sort By</option>
+            <option value="dueDate">Sort by Due Date (Default)</option>
+            <option value="status">Sort by Status</option>
+          </select>
+        </div>
+        <Popup type="add" onClick={handlePopup} isPopup={isPopup} />
+        <ul>
+          {todos.map((todo, index) => (
+            <li
+              className="todo-container"
+              key={todo.id}
+              style={{
+                backgroundColor: `var(${
+                  checkedStates[todo.id]
+                    ? '--unchecked-background-color'
+                    : '--checked-background-color'
+                })`,
+              }}
             >
-              Edit
-            </button>
-          </li>
-        ))}
-      </ul>
-    </div>
+              <input
+                type="checkbox"
+                name={todo.title}
+                id={todo.id}
+                checked={checkedStates[todo.id] || false}
+                onChange={() => handleCheckboxChange(todo.id)}
+              />
+              <div className="todo-content">
+                <div className="todo-title">{todo.title}</div>
+                <span className="todo-due">{todo.dueDate}</span>
+                <div className="todo-description">{todo.description}</div>
+                <div className="todo-status">Status: {todo.status}</div>
+              </div>
+
+              <button className="delete todo-btn" onClick={() => handleDelete(todo.id)}>
+                Delete
+              </button>
+              <button
+                className="edit todo-btn"
+                onClick={
+                  (handleUpdatePopup,
+                  () => {
+                    handleUpdateTodo(todo.id);
+                  })
+                }
+              >
+                Edit
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <Popup
+        type="update"
+        isPopup={updatePopup}
+        onClick={handleUpdatePopup}
+        selectedTodoObj={selectedTodoObj}
+        handleUpdateTodo={handleUpdateTodo}
+      />
+    </>
   );
 };
 

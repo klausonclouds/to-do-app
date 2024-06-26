@@ -15,17 +15,6 @@ function Popup({ onClick, isPopup, type, selectedTodoObj }) {
     id: null,
   });
 
-  const [todos, setTodos] = useState([]);
-
-  useEffect(() => {
-    const storedTodos = JSON.parse(localStorage.getItem('todos')) || [];
-    setTodos(storedTodos);
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem('todos', JSON.stringify(todos));
-  });
-
   // Fetch data during inital render
   useEffect(() => {
     fetch(endPoint)
@@ -58,7 +47,9 @@ function Popup({ onClick, isPopup, type, selectedTodoObj }) {
     e.preventDefault();
     if (type === 'add') {
       // Add new todo and store into localstorage
-      setTodos((prevTodos) => [...prevTodos, formData]);
+      const storedTodos = JSON.parse(localStorage.getItem('todos')) || [];
+      storedTodos.push(formData);
+      localStorage.setItem('todos', JSON.stringify(storedTodos));
       setFormData({
         title: '',
         description: '',
@@ -69,16 +60,13 @@ function Popup({ onClick, isPopup, type, selectedTodoObj }) {
       });
       onClick();
     } else if (type === 'update') {
+      //Update
       console.log(selectedTodoObj.id);
-      console.log(todos);
-      const updatedTodos = todos.map((todo) => {
-        if (todo.id === selectedTodoObj.id) {
-          return { ...todo, ...formData };
-        }
-        return todo;
-      });
-
-      setTodos(updatedTodos);
+      const storedTodos = JSON.parse(localStorage.getItem('todos'));
+      const todoToUpdateIndex = storedTodos.findIndex((todo) => todo.id === selectedTodoObj.id);
+      storedTodos[todoToUpdateIndex] = { ...formData, id: selectedTodoObj.id };
+      console.log(storedTodos);
+      localStorage.setItem('todos', JSON.stringify(storedTodos));
 
       onClick();
     }

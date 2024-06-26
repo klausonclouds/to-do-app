@@ -1,0 +1,18 @@
+.footer {
+    background-color: #5f0b93;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    font-family: 'Montserrat', Arial, Helvetica, sans-serif
+}
+
+.footer p {
+    margin-bottom: 1vh;
+    margin-top: 1vh;
+    font-size: 15px;
+    display: flex;
+    justify-content: center;
+}

@@ -1,1 +1,23 @@
+.header {
+    background-color: #5f0b95; 
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+    font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    position: sticky; /* Make the header sticky */
+    top: 0; /* Stick to the top of the viewport */
+    z-index: 1000; /* Ensure it's above other content */
+    width: 100%;
+}
+
+.logo {
+    width: 50px; /* Adjust width of the logo */
+    height: auto; /* Maintain aspect ratio */
+    margin-right: 20px; /* Adjust spacing between logo and text */
+}
+
+
 

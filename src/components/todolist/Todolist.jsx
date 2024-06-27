@@ -82,7 +82,7 @@ const Todolist = () => {
     if (option === 'dueDate') {
       sortedTodos.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
     } else if (option === 'status') {
-      sortedTodos.sort((a, b) => a.status.localeCompare(b.status));
+      sortedTodos.sort((a, b) => a.status.localeCompare(b.status)).reverse();
     }
 
     setTodos(sortedTodos);

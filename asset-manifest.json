@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/klausonclouds/to-do-app/static/css/main.966a7c37.css",
-    "main.js": "/klausonclouds/to-do-app/static/js/main.2c6fd397.js",
-    "static/js/453.6c800d60.chunk.js": "/klausonclouds/to-do-app/static/js/453.6c800d60.chunk.js",
-    "index.html": "/klausonclouds/to-do-app/index.html",
-    "main.966a7c37.css.map": "/klausonclouds/to-do-app/static/css/main.966a7c37.css.map",
-    "main.2c6fd397.js.map": "/klausonclouds/to-do-app/static/js/main.2c6fd397.js.map",
-    "453.6c800d60.chunk.js.map": "/klausonclouds/to-do-app/static/js/453.6c800d60.chunk.js.map"
+    "main.css": "/to-do-app/static/css/main.966a7c37.css",
+    "main.js": "/to-do-app/static/js/main.29657b45.js",
+    "static/js/453.6c800d60.chunk.js": "/to-do-app/static/js/453.6c800d60.chunk.js",
+    "index.html": "/to-do-app/index.html",
+    "main.966a7c37.css.map": "/to-do-app/static/css/main.966a7c37.css.map",
+    "main.29657b45.js.map": "/to-do-app/static/js/main.29657b45.js.map",
+    "453.6c800d60.chunk.js.map": "/to-do-app/static/js/453.6c800d60.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.966a7c37.css",
-    "static/js/main.2c6fd397.js"
+    "static/js/main.29657b45.js"
   ]
 }
